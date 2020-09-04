@@ -14,4 +14,4 @@
  
  You can then test the app by going to the mobile expo client and connecting via qr code. 
  
- # Created by George Huber 2020
+ # Created by George Huber
