@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { Dimensions, Image, Text, TextInput, View, Button } from 'react-native'
 import { Video } from 'expo-av';
 import * as firebase from "firebase";
@@ -26,7 +26,9 @@ export default class Login extends React.Component {
     this.state = {
       email: "",
       password: "",
-      errorMessage: null
+      errorMessage: null,
+      page:0,
+      sent:null,
     };
   }
   handleLogin = (email, password) => {
@@ -42,12 +44,61 @@ export default class Login extends React.Component {
     }
   }
   resetPasswordHandler = () => {
-    this.props.navigation.navigate('Reset');
+   this.setState({page:2,errorMessage:null})
   }
+
+
+
+
+
+  handleSignUp = (email, password) => {
+    var e =false;
+
+    try {
+
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, password)
+        .then(() => this.props.navigation.navigate('Main'))
+        .catch(error =>{ e=true;this.setState({ errorMessage: error.message })});
+
+      //copy into other pages
+      if(!e){
+      firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+          const db = firebase.firestore();
+
+          console.log("user " + user.uid);
+          console.log("made it this far");
+          db.collection("users").doc(user.uid).set({ data: "[]", totalHours: "0" })
+            .then(function () {
+              console.log("Document successfully written!");
+            });
+        }
+      });}
+
+    } catch (error) {
+      error => this.setState({ errorMessage: error.message })
+    }
+  }
+
+  send =  (emailAddress) => {var auth = firebase.auth();
+   
+
+    auth.sendPasswordResetEmail(emailAddress).then(()=>{
+  // Email sent.
+    this.setState({ sent: "A message has been sent to your email. Click the link to reset it." });}
+    ).catch(error => this.setState({ errorMessage: error.message }));}
+
   render() {
     return (
       <View style={styles.container}>
-        <Image style={styles.loginImage} source={require('../assets/vhsfancy.png')} />
+        {  this.state.page!=2?<Fragment>
+          <Image 
+          resizeMode="stretch"
+            style={styles.loginImage} source={require('../assets//D128Clear.png')} />
+        {(this.state.page===0) &&
+        <Fragment>
         <Text style={[styles.uvBoldFont,styles.headerText]}>Login</Text>
         
         <TextInput
@@ -83,18 +134,99 @@ export default class Login extends React.Component {
             </TouchableOpacity>
             <TouchableOpacity
 
-            onPress={() => this.props.navigation.navigate('SignUp')}
+            onPress={() => {this.setState({page:1,errorMessage:null,email:""})}}
           >
             <Text style={[styles.uvFont,styles.smallFrontButton]}>Don't have an account? Sign Up</Text>
             </TouchableOpacity>
         </View>
+        </Fragment>}
+
+        {/*signup page*/}
+
+        {this.state.page===1&&<Fragment>
+        <Text style={[styles.uvBoldFont,styles.headerText]}>Sign Up</Text>
+        
+        <TextInput
+          placeholder="Email"
+          autoCapitalize="none"
+          style={styles.textInput}
+          onChangeText={email => this.setState({ email })}
+
+        />
+        <TextInput
+          secureTextEntry
+          placeholder="Password"
+          autoCapitalize="none"
+          style={styles.textInput}
+          onChangeText={password => this.setState({ password })}
+
+        />
+        {this.state.errorMessage &&
+          <Text style={{ color: 'red' }}>
+            {this.state.errorMessage}
+          </Text>}
+        <View style={{ padding: .13*width }}>
+          <TouchableOpacity onPress={() => this.handleSignUp(this.state.email, this.state.password)}>
+            <View style={styles.frontButtonContainer}>
+              <Text style={[styles.uvBoldFont, styles.frontButtonText]}>Sign Up</Text>
+            </View>
+          </TouchableOpacity>
+          <View style={{ margin: .05*width }} />
+          <TouchableOpacity
+
+            onPress={() => {this.setState({page:0,errorMessage:null,email:""})}}
+          >
+            <Text style={[styles.uvFont, styles.smallFrontButton,]}>Already have an account? Login</Text>
+          </TouchableOpacity>
+        </View>
+        </Fragment>}
+          </Fragment>:
+
+
+
+          
+          <Fragment>{/*reset page*/}
+          <Text style={[styles.uvBoldFont,styles.headerText,{marginTop:height*.2}]}>Type Your Email: </Text>
+          {this.state.errorMessage &&
+            <Text style={{ color: 'red' }}>
+              {this.state.errorMessage}
+            </Text>}
+          {this.state.sent && <Text style={{marginVertical:0.0246*height,fontSize:15,fontFamily:"Futura-Medium"}}>{this.state.sent}</Text>}
+          <TextInput
+            style={styles.textInput}
+            autoCapitalize="none"
+            placeholder="Email"
+            onChangeText={email => this.setState({ email })}
+            
+          />
+          <View style={{padding:50}}>
+          <TouchableOpacity
+
+  onPress={() => this.send(this.state.email)}
+>
+<Text style={[styles.uvFont, styles.smallFrontButton,]}>Reset Password</Text>
+</TouchableOpacity>
+
+<TouchableOpacity
+
+onPress={() =>  {this.setState({page:0,errorMessage:null,email:""})}}
+>
+<Text style={[styles.uvFont, styles.smallFrontButton,]}>Back</Text>
+</TouchableOpacity>
+          
+          </View>
+            </Fragment>}
+
+
+
+        <View style={[styles.video,{zIndex:-1,backgroundColor:"rgba(0,0,0,0.2)"}]}/>
         <Video style={styles.video} 
         shouldPlay
         isLooping
-        rate={0.5}
+        rate={1}
         resizeMode="cover"
         
-        source={ require("../assets/login2.mp4") }/>
+        source={ require("../assets/login.mp4") }/>
       </View>
     )
   }

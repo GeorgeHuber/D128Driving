@@ -21,7 +21,7 @@ import {config} from "../credentials.js";
 export default class Loading extends React.Component {
     componentDidMount =async() => {
         firebase.auth().onAuthStateChanged(user => {
-          this.props.navigation.navigate(user ? 'Main' : 'SignUp')
+          this.props.navigation.navigate(user ? 'Main' : 'Login')
         })}
     render() {
     return (
