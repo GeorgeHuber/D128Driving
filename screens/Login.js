@@ -1,6 +1,6 @@
 import React from 'react'
 import { Dimensions, Image, Text, TextInput, View, Button } from 'react-native'
-import { GoogleSignIn } from 'expo';
+import { Video } from 'expo-av';
 import * as firebase from "firebase";
 import styles from '../styles.js';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -47,7 +47,7 @@ export default class Login extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Image style={{ width: .53*width, height: 0.4*height }} source={require('../assets/vhsfancy.png')} />
+        <Image style={styles.loginImage} source={require('../assets/vhsfancy.png')} />
         <Text style={[styles.uvBoldFont,styles.headerText]}>Login</Text>
         
         <TextInput
@@ -88,6 +88,13 @@ export default class Login extends React.Component {
             <Text style={[styles.uvFont,styles.smallFrontButton]}>Don't have an account? Sign Up</Text>
             </TouchableOpacity>
         </View>
+        <Video style={styles.video} 
+        shouldPlay
+        isLooping
+        rate={0.5}
+        resizeMode="cover"
+        
+        source={ require("../assets/login2.mp4") }/>
       </View>
     )
   }

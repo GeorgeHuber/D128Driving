@@ -34,5 +34,18 @@ export default StyleSheet.create({
   smallFrontButton:{fontSize:16,marginVertical:0.01*height},
   frontButtonContainer:{alignSelf:"center",height:0.05*height,width:width*.6,borderRadius:20,borderWidth:2,marginBottom:0.01*height},
   textInput:{padding:.0267*width,width:.8*width,borderWidth:2,marginBottom:.01*height},
-  container:{flex:1,alignItems:"center",marginTop:0.043*height}
+  container:{flex:1,alignItems:"center"},
+  loginImage:{ width: .53*width, height: 0.4*height,marginTop:height*0.1 },
+  video: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    left: 0,
+    bottom: 0,
+    zIndex: -1,
+    width:width,
+    height:height,
+    
+    
+   },
 });

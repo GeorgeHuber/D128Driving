@@ -1,7 +1,7 @@
 // SignUp.js
 import React from 'react'
 import { Dimensions,StyleSheet, Text, Image, TextInput, View, TouchableOpacity,Button } from 'react-native'
-
+import {Video} from "expo-av"
 import firebase from "firebase";
 import "firebase/firestore"
 import styles from '../styles.js';
@@ -61,7 +61,7 @@ export default class SignUp extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Image style={{width: .53*width, height: 0.4*height }} source={require('../assets/vhsfancy.png')} />
+        <Image style={styles.loginImage} source={require('../assets/vhsfancy.png')} />
         <Text style={[styles.uvBoldFont,styles.headerText]}>Sign Up</Text>
         
         <TextInput
@@ -97,6 +97,13 @@ export default class SignUp extends React.Component {
             <Text style={[styles.uvFont, styles.smallFrontButton,]}>Already have an account? Login</Text>
           </TouchableOpacity>
         </View>
+        <Video style={styles.video} 
+        shouldPlay
+        isLooping
+        rate={0.5}
+        resizeMode="cover"
+        
+        source={ require("../assets/login2.mp4") }/>
       </View>
     )
   }
