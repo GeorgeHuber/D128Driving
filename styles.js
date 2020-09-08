@@ -15,18 +15,22 @@ export default StyleSheet.create({
   uvBoldFont: { fontFamily: "Avenir-Black" },
   //Text boxes in Input hour page
   textBox: { borderRadius:3,margin:4,borderColor: "black", borderWidth: 2, padding: 0.0267*width, width: .8*width, alignSelf: 'center' },
-  buttonContainer:{ alignItems: "center",paddingHorizontal:0.053*width,paddingVertical:0.00615*height, backgroundColor: "rgba(255, 255, 255,0.1)",borderRadius: 10,borderWidth:2 },
+  buttonContainer:{ alignItems: "center",paddingHorizontal:0.053*width,paddingVertical:0.00615*height, backgroundColor: "rgba(255, 255, 255,0.6)",borderRadius: 10,borderWidth:2 },
   //blurb box on export page
   congrats:{alignItems:"center",marginVertical:.1*height,marginHorizontal:0.053*width,borderRadius:10,borderWidth:4, padding:0.0267*width,backgroundColor: "rgba(0, 89, 162,0.5)"},
   //Home page hour total styling
   hourTotalText:{textAlign:"right", fontSize:22,marginHorizontal:0.0267*width,borderTopWidth:1,borderBottomWidth:1},
-  hourTotalLines1:{borderTopWidth:1,borderBottomWidth:1},
-  hourTotalLines2:{borderBottomWidth:1},
-
+  hourTotalLines1:{backgroundColor:"rgba(255,255,255,0.6)",borderWidth:1,marginBottom:height*0.02,borderRadius:2},
+  hourTotalLines2:{backgroundColor:"rgba(255,255,255,0.6)",borderWidth:1,marginBottom:height*0.02,borderRadius:2},
+  imageRow:{flexDirection:"row",alignContent:"space-around",width:width},
+  imageInRow1:{width: .2*height, height: .2*height,marginTop:.062*height},
+  imageInRow2:{width: .25*height, height: .25*height,marginTop:.062*height},
+  welcomeContainer:{width:.9*width,marginTop: .062*height,marginBottom:.04*height, marginHorizontal:.04*height, borderRadius:5,
+    paddingHorizontal: .04*width, paddingVertical: .02*height, borderWidth:2,backgroundColor: "rgba(255, 255, 255,0.6)"},
   //infoPage
   sectionTitle:{textAlign:"center",fontSize:30,margin:0.0267*width,color:'rgb(0,89,162)'},
-  infoContainer:{marginHorizontal:0.053*width,alignContent:"center",alignItems:"center",marginVertical:.1*height},
-  infoBodyText:{fontSize:20,marginBottom:0.025*height,textAlign:"left"},
+  infoContainer:{paddingVertical:height*0.02, marginHorizontal:0.04*width,alignContent:"center",alignItems:"center",marginVertical:.05*height,backgroundColor:"rgba(255,255,255,0.6)",borderRadius:5},
+  infoBodyText:{fontSize:20,marginBottom:0.025*height,textAlign:"left",color:"black",marginHorizontal:width*0.03},
 
   //login and sign in
   headerText:{ marginVertical: 0.025*height, fontSize: 30,color:"rgb(255,255,255)"},

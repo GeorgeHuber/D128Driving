@@ -156,28 +156,31 @@ function Download({navigation}) {
 
   //Function is called once when page is loaded to get the course hour array from a firebase database
   React.useEffect(()=>{
-    const unsubscribe = navigation.addListener('focus', () => {
+    const unsubscribe =  async ()=>
       // The screen is focused
       // Call any action
-      firebase.auth().onAuthStateChanged(
+       firebase.auth().onAuthStateChanged(
         function (user) {
           if (user) {
             const db = firebase.firestore();
             var current = db.collection("users").doc(user.uid);
             current.get().then(function (doc) {
               setCourseHours(JSON.parse(doc.data().data));
-              
-            })
-    
+
+            });
+
           }
         }
-      )
-    });
+      );
+      const listen = navigation.addListener('focus', () => {
+        // do something
+        unsubscribe()
+      })
     
-    return unsubscribe;
+    return  listen
     
   
-  },[navigation])
+  },[])
   
   //function to be called on press of email button
   //opens a ios native tab to send hours as pdf attachment in user customizable email
@@ -209,10 +212,8 @@ function Download({navigation}) {
   
 
   return (
-    <LinearGradient
-        colors={['white', 'rgb(0,89,162)']}
-        style={{ height: height }}
-      >
+    <View>
+    <Image source={require("../assets/homeBackground.jpeg")} resizeMode="cover" style={styles.video}/>
     <View style={{ marginTop:.123*height, marginBottom: .246*height, alignItems: 'center' }} >
       <Text style={[{ alignSelf: 'center', fontSize: 30,marginBottom:.04*height },styles.uvBoldFont]}>Export Your Hours</Text>
       <TouchableOpacity onPress={()=>printFile()}>
@@ -239,7 +240,7 @@ function Download({navigation}) {
           
         </View>}
     </View>
-    </LinearGradient>
+   </View>
   )
 }
 
@@ -259,16 +260,17 @@ function Home({navigation}) {
       await firebase.auth().signOut();
       navigation.navigate("login");
     } catch (e) {
-      console.log(e);
+      //console.log(e);
     }
     
   }
 
   //Function is called once when page is loaded to get the course hour array from a firebase database
   React.useEffect(() => {
-    const unsubscribe = navigation.addListener('focus', () => {
-      // The screen is focused
-      // Call any action
+    
+
+    const unsubscribe = async () =>
+ 
       firebase.auth().onAuthStateChanged(
         function (user) {
           if (user) {
@@ -283,21 +285,25 @@ function Home({navigation}) {
           }
         }
       )
-    });
+      const listen = navigation.addListener('focus', () => {
+        // do something
+        unsubscribe()
+      })
     
-    return unsubscribe ;},[navigation]
+    
+    return listen ;},[]
   );
 
   //the actual page
   return (
     <View >
-      <LinearGradient
-        colors={['white', 'rgb(0,89,162)']}
-        style={{ height: height }}
-      >
+     <Image source={require("../assets/homeBackground.jpeg")} resizeMode="cover" style={styles.video}/>
       <View style={{ paddingVertical: .062*height, alignItems: "center" }}>
         {/* VHHS logo */}
-        <Image style={{ width: .667*width, height: .31*height,marginTop:.062*height }} source={require('../assets/logoWithoutText.png')} />
+        <View style={styles.imageRow}>
+        <Image style={styles.imageInRow1} resizeMode="stretch" source={require('../assets/VHHS.png')} />
+        <Image style={styles.imageInRow2} resizeMode="stretch" source={require('../assets/LHS2.png')} />
+        </View>
         <View style={{marginTop:.062*height}}>
           <View style={styles.hourTotalLines1}>
           <Text style={[styles.hourTotalText,styles.uvFont]}>{getTotal(courseHours,"All")>50?50:getTotal(courseHours,"All").toFixed(2)}/50  Total Hours Complete</Text>
@@ -306,11 +312,10 @@ function Home({navigation}) {
           <Text style={[styles.hourTotalText,styles.uvFont]}>{getTotal(courseHours,"Night")>10?10:getTotal(courseHours,"Night").toFixed(2)}/10 Night Hours Complete</Text>
           </View>
         </View>
-        <View style={{width:.9*width,marginTop: .062*height,marginBottom:.04*height, marginHorizontal:.04*height, borderRadius:5,
-           paddingHorizontal: .04*width, paddingVertical: .02*height, borderWidth:2,backgroundColor: "rgba(255, 255, 255,0.1)"}}>
+        <View style={styles.welcomeContainer}>
         <Text
           style={[{ fontSize: 25,textAlign:"center" }, styles.uvFont]}>
-          Welcome to the VHHS Drivers Ed App!</Text>
+          Welcome to the D128 Drivers Ed App!</Text>
           </View>
         <TouchableOpacity onPress={() => signOutUser()}>
           <View style={styles.buttonContainer}>
@@ -319,7 +324,7 @@ function Home({navigation}) {
         </View>
         </TouchableOpacity> 
       </View>
-      </LinearGradient>
+      
     </View>
   );
 }
@@ -339,7 +344,7 @@ function HoursPage({navigation}) {
       // The screen is focused
       // Call any action
       //gets user object needed to find file
-    
+      const unsubscribe = async () =>
     firebase.auth().onAuthStateChanged(
       function (user) {
         if (user) {
@@ -353,12 +358,15 @@ function HoursPage({navigation}) {
         }
       }
     )
-    console.log(totalHours)
-    const unsubscribe = navigation.addListener('focus', () => {
+    
+    
+    const listen = navigation.addListener('focus', () => {
+      // do something
+      unsubscribe()
     })
     
-    return unsubscribe;
-  }, [navigation])
+    return listen
+  }, [])
 
   //function to add an hour object to the array
   //updates firebase data and the total hour variable with new hour
@@ -419,10 +427,7 @@ function HoursPage({navigation}) {
   return (
     
     <View >
-      <LinearGradient
-        colors={['white', 'rgb(0,89,162)']}
-        style={{ height: "100%" }}
-      >
+      <Image source={require("../assets/homeBackground.jpeg")} resizeMode="cover" style={styles.video}/>
 
 
         <View style={{ alignItems: 'center', justifyContent: "center", marginBottom: 0.0246*height, marginTop: 0.061*height, paddingVertical: 0.0123*height }}>
@@ -495,19 +500,26 @@ function HoursPage({navigation}) {
         }}>
         </FlatList>
         {/* Closing tags for render containers */}
-      </LinearGradient>
+      
     </View>
   )
 }
 
 function infoPage(){
   return(
+    
     <View style={{height:height}}>
+      <Image source={require("../assets/homeBackground.jpeg")} resizeMode="cover" style={styles.video}/>
       <ScrollView>
-        <View style={styles.infoContainer}>
+        <View style={[styles.infoContainer,{marginTop:height*0.2}]}>
         <Text style={[styles.sectionTitle,styles.uvBoldFont]}>About The App</Text>
         <Text style={[styles.infoBodyText,styles.uvFont]}>     Within the Illinois drivers education program, students are required by law to record 50 total hours of driving (10 of which are at night) before going to get their lisence from the DMV. This app was designed by a highschool student to help others log their practice hours and then export them to print out.  </Text>
+        </View>
+        <View style={styles.infoContainer}>
         <Text style={[styles.infoBodyText,styles.uvFont]}>Hours can be added under the hours page by filling out the pop up form. Students can record the weather, driving location, date, and whether they were driving during the day or at night. After input they are sorted in chronological order. These hours can then be emailed to a printing capable device as a pdf.</Text>
+        </View>
+
+        <View style={[styles.infoContainer,{marginBottom:height*0.2}]}>
         <Text style={[styles.sectionTitle,styles.uvBoldFont]}>The Trip to the DMV</Text>
         <Text style={[styles.infoBodyText,styles.uvFont]}>     When  you go to pick up your liscense make sure to have:</Text>
         <Text style={[styles.infoBodyText,styles.uvFont]}>-Your permit</Text>
