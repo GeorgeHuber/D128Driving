@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "D128Driving",
-    "slug": "react",
+    "slug": "d128driving",
     "privacy": "public",
     "sdkVersion": "36.0.0",
     "platforms": [
@@ -11,10 +11,10 @@
     ],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/D128FullC.png",
+    "icon": "./assets/logov2.png",
     "splash": {
-      "image": "./assets/D128FullC.png",
-      "resizeMode": "contain",
+      "image": "./assets/homeBackground.png",
+      "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
     "updates": {
@@ -27,6 +27,7 @@
       "bundleIdentifier": "host.george.drivers",
       "supportsTablet": true
     },
-    "description": "A drivers hours log for D128 with firebase backend"
+    "description": "A drivers hours log for District 128 with firebase backend",
+    "githubUrl": "https://github.com/GeorgeHuber/D128Driving"
   }
 }

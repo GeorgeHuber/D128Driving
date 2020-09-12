@@ -1,4 +1,4 @@
-import React from 'react'
+
 
 
 import { createAppContainer,createSwitchNavigator } from 'react-navigation'
@@ -13,7 +13,7 @@ import Main from './screens/Main.js'
 // create our app's navigation stack
 const Foo = createSwitchNavigator(
   {
-     Loading,
+    Loading,
     
     Login,
     Main

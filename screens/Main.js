@@ -1,18 +1,13 @@
-/*import * as React from 'react';
-import {NavigationContainer } from '@react-navigation/native';
-import {createStackNavigator } from '@react-navigation/stack'
-import { ScrollView, StyleSheet, Text, View,TextInput, Button,List, ListItem,Fab,Icon,Content } from 'react-native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';*/
 
 import * as React from 'react';
-import { Dimensions, Image, View, Text, TextInput,ScrollView, FlatList, TouchableOpacity, Linking, TabBarIOS, TextBase } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import { Dimensions, Image, View, Text, ScrollView, FlatList, TouchableOpacity, Linking, } from 'react-native';
+import { NavigationContainer,useFocusEffect } from '@react-navigation/native';
 import * as Print from 'expo-print';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import firebase from "firebase";
 import "firebase/firestore"
 import * as MailComposer from 'expo-mail-composer';
-import { LinearGradient } from 'expo-linear-gradient';
+
 
 
 
@@ -156,7 +151,8 @@ function Download({navigation}) {
 
   //Function is called once when page is loaded to get the course hour array from a firebase database
   React.useEffect(()=>{
-    const unsubscribe =  async ()=>
+    
+    const unsubscribe = 
       // The screen is focused
       // Call any action
        firebase.auth().onAuthStateChanged(
@@ -172,15 +168,41 @@ function Download({navigation}) {
           }
         }
       );
-      const listen = navigation.addListener('focus', () => {
-        // do something
-        unsubscribe()
-      })
+      
     
-    return  listen
+    return  unsubscribe;
     
   
   },[])
+
+  useFocusEffect(
+    React.useCallback(() => {
+      // Do something when the screen is focused
+      const unsubscribe = 
+      // The screen is focused
+      // Call any action
+       firebase.auth().onAuthStateChanged(
+        function (user) {
+          if (user) {
+            const db = firebase.firestore();
+            var current = db.collection("users").doc(user.uid);
+            current.get().then(function (doc) {
+              setCourseHours(JSON.parse(doc.data().data));
+
+            });
+
+          }
+        }
+      );
+      
+      return ()=>unsubscribe()
+        // Do something when the screen is unfocused
+        // Useful for cleanup functions
+      
+    }, [])
+  );
+
+
   
   //function to be called on press of email button
   //opens a ios native tab to send hours as pdf attachment in user customizable email
@@ -213,29 +235,29 @@ function Download({navigation}) {
 
   return (
     <View>
-    <Image source={require("../assets/homeBackground.jpeg")} resizeMode="cover" style={styles.video}/>
+    <Image source={require("../assets/homeBackground.png")} resizeMode="cover" style={styles.video}/>
     <View style={{ marginTop:.123*height, marginBottom: .246*height, alignItems: 'center' }} >
-      <Text style={[{ alignSelf: 'center', fontSize: 30,marginBottom:.04*height },styles.uvBoldFont]}>Export Your Hours</Text>
+      <Text style={[{ alignSelf: 'center', fontSize: 30,marginBottom:.04*height },styles.uvBoldFont,styles.homeHourTotalText]}>Export Your Hours</Text>
       <TouchableOpacity onPress={()=>printFile()}>
-        <View style={[styles.buttonContainer,{width:.8*width,marginVertical:.04*height}]}>
-          <Text style={[styles.uvFont,{fontSize:25}]}>Print</Text>
+        <View style={[styles.buttonContainer,{width:.8*width,marginVertical:.04*height,backgroundColor:"rgba(255,255,255,1)"}]}>
+          <Text style={[styles.uvFont,{fontSize:25,color:"rgb(0,89,162)"}]}>Print</Text>
         </View>
       </TouchableOpacity>
       
       <TouchableOpacity onPress={()=>emailFile()}>
-        <View style={[styles.buttonContainer,{width:.8*width}]}>
-          <Text style={[styles.uvFont,{fontSize:25}]}>Email</Text>
+        <View style={[styles.buttonContainer,{width:.8*width,backgroundColor:"rgba(255,255,255,1)"}]}>
+          <Text style={[styles.uvFont,{fontSize:25,color:"rgb(0,89,162)"}]}>Email</Text>
         </View>
       </TouchableOpacity>
 
       {readyToGetLicense()&&<View style={styles.congrats}>
-        <Text style={[styles.uvFont,{fontSize:20,color:"rgb(255,255,255)"}]}>
+        <Text style={[styles.uvFont,{fontSize:20,color:"rgb(0,89,162)"}]}>
           Congratulations on completing the required number of hours to graduate to your license! Remember that you still need to have held your permit for 9 months to go to the DMV. Print out this form to take with you and refer to the info page for more. Stay Safe!</Text>
 
         </View>}
 
-        {!readyToGetLicense()&&<View style={styles.congrats}>
-        <Text style={[styles.uvFont,{fontSize:20,color:"rgb(255,150,150)"}]}>
+        {!readyToGetLicense()&&<View style={[styles.congrats,{backgroundColor:"rgba(0,0,0,0.8)"}]}>
+        <Text style={[styles.uvFont,{fontSize:20,color:"rgb(255,255,255)"}]}>
           Just a reminder, you do not have the required hours needed to get your license. The state of Illinois requires 10 hours of nighttime driving and 50 hours driving before you can take your drivers test. </Text>
           
         </View>}
@@ -269,7 +291,7 @@ function Home({navigation}) {
   React.useEffect(() => {
     
 
-    const unsubscribe = async () =>
+    const unsubscribe = 
  
       firebase.auth().onAuthStateChanged(
         function (user) {
@@ -285,19 +307,41 @@ function Home({navigation}) {
           }
         }
       )
-      const listen = navigation.addListener('focus', () => {
-        // do something
-        unsubscribe()
-      })
     
     
-    return listen ;},[]
+    return unsubscribe ;},[]
   );
+  
+  useFocusEffect(
+    React.useCallback(() => {
+      // Do something when the screen is focused
+      const unsubscribe = 
+ 
+      firebase.auth().onAuthStateChanged(
+        function (user) {
+          if (user) {
+            const db = firebase.firestore();
+            var current = db.collection("users").doc(user.uid);
+            current.get().then(function (doc) {
+              
+              setCourseHours(JSON.parse(doc.data().data));}
+              
+            )
+  
+          }
+        }
+      )
+      
+      return ()=>unsubscribe();
+    }, [])
+  );
+
 
   //the actual page
   return (
     <View >
-     <Image source={require("../assets/homeBackground.jpeg")} resizeMode="cover" style={styles.video}/>
+     <Image source={require("../assets/lake.jpg")} resizeMode="cover" style={styles.video}/>
+     
       <View style={{ paddingVertical: .062*height, alignItems: "center" }}>
         {/* VHHS logo */}
         <View style={styles.imageRow}>
@@ -306,10 +350,10 @@ function Home({navigation}) {
         </View>
         <View style={{marginTop:.062*height}}>
           <View style={styles.hourTotalLines1}>
-          <Text style={[styles.hourTotalText,styles.uvFont]}>{getTotal(courseHours,"All")>50?50:getTotal(courseHours,"All").toFixed(2)}/50  Total Hours Complete</Text>
+          <Text style={[styles.hourTotalText,styles.uvFont]}>{getTotal(courseHours,"All")>=50?50:getTotal(courseHours,"All").toFixed(2)}/50  Total Hours Complete</Text>
           </View>
           <View style={styles.hourTotalLines2}>
-          <Text style={[styles.hourTotalText,styles.uvFont]}>{getTotal(courseHours,"Night")>10?10:getTotal(courseHours,"Night").toFixed(2)}/10 Night Hours Complete</Text>
+          <Text style={[styles.hourTotalText,styles.uvFont]}>{getTotal(courseHours,"Night")>=10?10:getTotal(courseHours,"Night").toFixed(2)}/10 Night Hours Complete</Text>
           </View>
         </View>
         <View style={styles.welcomeContainer}>
@@ -318,9 +362,9 @@ function Home({navigation}) {
           Welcome to the D128 Drivers Ed App!</Text>
           </View>
         <TouchableOpacity onPress={() => signOutUser()}>
-          <View style={styles.buttonContainer}>
+          <View style={[styles.buttonContainer,{backgroundColor:"rgba(255,255,255,1)"}]}>
           {/* Lougout button */}
-          <Text style={[styles.uvBoldFont,{fontSize:30,opacity:1}]}>Logout</Text>
+          <Text style={[styles.uvBoldFont,{fontSize:30}]}>Logout</Text>
         </View>
         </TouchableOpacity> 
       </View>
@@ -344,7 +388,7 @@ function HoursPage({navigation}) {
       // The screen is focused
       // Call any action
       //gets user object needed to find file
-      const unsubscribe = async () =>
+      const unsubscribe = 
     firebase.auth().onAuthStateChanged(
       function (user) {
         if (user) {
@@ -360,13 +404,35 @@ function HoursPage({navigation}) {
     )
     
     
-    const listen = navigation.addListener('focus', () => {
-      // do something
-      unsubscribe()
-    })
     
-    return listen
+    
+    return unsubscribe
   }, [])
+  
+  useFocusEffect(
+    React.useCallback(() => {
+      // Do something when the screen is focused
+      const unsubscribe = 
+      firebase.auth().onAuthStateChanged(
+        function (user) {
+          if (user) {
+            const db = firebase.firestore();
+            var current = db.collection("users").doc(user.uid);
+            current.get().then(function (doc) {
+              setCourseHours(JSON.parse(doc.data().data));
+              setTotalHours(JSON.parse(doc.data().totalHours));
+            })
+  
+          }
+        }
+      )
+      
+      return ()=>unsubscribe()
+        // Do something when the screen is unfocused
+        // Useful for cleanup functions
+      
+    }, [])
+  );
 
   //function to add an hour object to the array
   //updates firebase data and the total hour variable with new hour
@@ -427,16 +493,16 @@ function HoursPage({navigation}) {
   return (
     
     <View >
-      <Image source={require("../assets/homeBackground.jpeg")} resizeMode="cover" style={styles.video}/>
+      <Image source={require("../assets/homeBackground.png")} resizeMode="cover" style={styles.video}/>
 
 
         <View style={{ alignItems: 'center', justifyContent: "center", marginBottom: 0.0246*height, marginTop: 0.061*height, paddingVertical: 0.0123*height }}>
           {/* Total Hour Display */}
-          <Text style={[{ fontSize: 30 }, styles.uvBoldFont]}>Total Hours: {getTotal(courseHours, hourType).toFixed(2)}</Text>
+          <Text style={[styles.homeHourTotalText, styles.uvBoldFont]}>Total Hours: {getTotal(courseHours, hourType).toFixed(2)}</Text>
 
           {/* Add hour button */}
           {!show && <TouchableOpacity onPress={() => setShow(true)}>
-              <View style={{ alignSelf: "center", margin: 0.053*width, paddingHorizontal: 0.053*width, borderWidth: 4, borderRadius: 10 }}>
+              <View style={styles.addButton}>
                 <Text style={[{ fontSize: 24 }, styles.uvFont]}>Add Drivers Hours</Text>
               </View>
           </TouchableOpacity>}
@@ -465,22 +531,22 @@ function HoursPage({navigation}) {
           </View>}
           {/*Simple indroduction instructions only shown when user has not added any hours */}
           {(!show && totalHours == 0) && 
-          <Text style={[{ marginHorizontal: .11*width, fontSize: 20, marginVertical: .05*height },styles.uvFont]}>Welcome to your hours page! to get started click the Add Driver Hours Button!</Text>}
+          <Text style={[{ marginHorizontal: .11*width, fontSize: 20, marginVertical: .05*height },styles.welcomeContainer,styles.uvFont]}>Welcome to your hours page! to get started click the Add Driver Hours Button!</Text>}
         
         </View >
         {show && <ObjInput onAddObj={addHourHandler} />}
 
 
         {/* Displays hours using the flatlist which renders all items in the coursehours array*/}
-        <FlatList style={{  flex:1 }} data={courseHours} renderItem={itemData => {
+        <FlatList style={{  marginBottom:height*0.3 }} data={courseHours} renderItem={itemData => {
           //only displays the object if it matches the current hourType
           if (itemData.item.isDay == hourType || hourType == "All") {
             return (
               //this is the code for the actual hour blocks which display concise data about each time the user drove
-              <View style={{ padding: 0.025*height, width: .9*width, borderRadius: 10, backgroundColor: "rgb(0,89,162)", flexDirection: 'column', alignSelf: "center", alignItems: 'center', marginBottom: 0.03*height }}>
-                <Text style={[{ alignContent: 'center', color: "white", fontSize: 15 }, styles.uvBoldFont]}>{`${itemData.item.value} hours ${itemData.item.minutes} minutes`}</Text>
+              <View style={{ padding: 0.025*height, width: .9*width, borderRadius: 10, backgroundColor: "rgba(255,255,255,0.9)", flexDirection: 'column', alignSelf: "center", alignItems: 'center', marginBottom: 0.03*height }}>
+                <Text style={[{ alignContent: 'center', color: "black", fontSize: 15 }, styles.uvBoldFont]}>{`${itemData.item.value} hours ${itemData.item.minutes} minutes`}</Text>
                 <View style={{ flexDirection: 'row', alignItems: "center" }}>
-                  <Text style={[{ alignContent: 'center', color: "white", fontSize: 20 }, styles.uvBoldFont]}>
+                  <Text style={[{ alignContent: 'center', color: "black", fontSize: 20 }, styles.uvBoldFont]}>
                     {`        ${itemData.item.date} during the ${itemData.item.isDay}       `}
                   </Text>
                   {/* The remove button which deletes the hour object from the list*/}
@@ -491,7 +557,7 @@ function HoursPage({navigation}) {
                   </TouchableOpacity>
 
                 </View>
-                <Text style={[{ alignContent: 'center', color: "white", fontSize: 15 }, styles.uvFont]}>
+                <Text style={[{ alignContent: 'center', color: "black", fontSize: 15 }, styles.uvFont]}>
                   {`weather: ${itemData.item.weather}  -  road type: ${itemData.item.road} `}
                 </Text>
               </View>
@@ -509,7 +575,8 @@ function infoPage(){
   return(
     
     <View style={{height:height}}>
-      <Image source={require("../assets/homeBackground.jpeg")} resizeMode="cover" style={styles.video}/>
+      
+      <Image source={require("../assets/homeBackground.png")} resizeMode="cover" style={styles.video}/>
       <ScrollView>
         <View style={[styles.infoContainer,{marginTop:height*0.2}]}>
         <Text style={[styles.sectionTitle,styles.uvBoldFont]}>About The App</Text>

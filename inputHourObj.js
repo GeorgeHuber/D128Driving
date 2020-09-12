@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Picker, Button, View, Text, TextInput,TouchableOpacity,FlatList,DatePickerIOS } from 'react-native';
+import { Picker,  View, Text, TextInput,TouchableOpacity,DatePickerIOS } from 'react-native';
 
 import  styles  from './styles.js';
 
@@ -38,7 +38,7 @@ const roadInputHandler=(enteredText)=>{
 setEnteredRoad(enteredText);
 }
   return(
-    <View style={{padding:10,flexDirection:'column',alignContent:'center'}}>
+    <View style={styles.inputBox}>
         <TextInput placeholder="Enter Hours: " 
         keyboardType='numeric'
         returnKeyType='done'
@@ -88,7 +88,7 @@ setEnteredRoad(enteredText);
         />
         <TouchableOpacity onPress={props.onAddObj.bind(this,enteredHour,enteredMinutes,enteredDay,enteredDate,enteredWeather,enteredRoad)}>
         <View style={{padding:10,width:80,borderWidth:2,borderRadius:7,alignSelf:"center",alignContent:"center",backgroundColor:"white"}}>
-        <Text style={[styles.uvFont,{fontSize:20,alignSelf:"center"}]}>ADD</Text>
+        <Text style={[styles.uvFont,{fontSize:20,alignSelf:"center"}]}>{(enteredHour==0||enteredHour==="")&&(enteredMinutes==0||enteredMinutes==="")?"EXIT":"ADD" }</Text>
         </View>
         </TouchableOpacity>
       </View>)

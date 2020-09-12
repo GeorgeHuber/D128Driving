@@ -219,14 +219,14 @@ onPress={() =>  {this.setState({page:0,errorMessage:null,email:""})}}
 
 
 
-        <View style={[styles.video,{zIndex:-1,backgroundColor:"rgba(0,0,0,0.2)"}]}/>
+        <View style={[styles.video,{zIndex:-1,backgroundColor:"rgba(0,0,0,0.0)"}]}/>
         <Video style={styles.video} 
         shouldPlay
         isLooping
         rate={1}
         resizeMode="cover"
         
-        source={ require("../assets/login.mp4") }/>
+        source={ require("../assets/login2.mp4") }/>
       </View>
     )
   }
