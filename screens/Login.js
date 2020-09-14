@@ -120,7 +120,7 @@ export default class Login extends React.Component {
           <Text style={{ color: 'red' }}>
             {this.state.errorMessage}
           </Text>}
-        <View style={{ padding: .13*width }}>
+        <View style={{ paddingVertical:.05*height,paddingHorizontal: .13*width }}>
           <TouchableOpacity onPress={() => this.handleLogin(this.state.email, this.state.password)}>
             <View style={styles.frontButtonContainer}>
               <Text style={[styles.uvBoldFont, styles.frontButtonText]}>Login</Text>
@@ -165,13 +165,13 @@ export default class Login extends React.Component {
           <Text style={{ color: 'red' }}>
             {this.state.errorMessage}
           </Text>}
-        <View style={{ padding: .13*width }}>
+        <View style={{ paddingVertical:0.05*height,paddingHorizontal: .13*width }}>
           <TouchableOpacity onPress={() => this.handleSignUp(this.state.email, this.state.password)}>
             <View style={styles.frontButtonContainer}>
               <Text style={[styles.uvBoldFont, styles.frontButtonText]}>Sign Up</Text>
             </View>
           </TouchableOpacity>
-          <View style={{ margin: .05*width }} />
+          <View style={{ marginVertical:0.018*height,marginHorizontal: .05*width }} />
           <TouchableOpacity
 
             onPress={() => {this.setState({page:0,errorMessage:null,email:""})}}
@@ -199,19 +199,19 @@ export default class Login extends React.Component {
             onChangeText={email => this.setState({ email })}
             
           />
-          <View style={{padding:50}}>
+          <View style={{padding:height*.1}}>
           <TouchableOpacity
 
   onPress={() => this.send(this.state.email)}
 >
-<Text style={[styles.uvFont, styles.smallFrontButton,]}>Reset Password</Text>
+<Text style={[styles.uvFont, styles.smallFrontButton,{fontSize:20}]}>Reset Password</Text>
 </TouchableOpacity>
 
 <TouchableOpacity
 
 onPress={() =>  {this.setState({page:0,errorMessage:null,email:""})}}
 >
-<Text style={[styles.uvFont, styles.smallFrontButton,]}>Back</Text>
+<Text style={[styles.uvFont, styles.smallFrontButton,{fontSize:20}]}>Back</Text>
 </TouchableOpacity>
           
           </View>

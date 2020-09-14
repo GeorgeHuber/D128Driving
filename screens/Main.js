@@ -345,8 +345,12 @@ function Home({navigation}) {
       <View style={{ paddingVertical: .062*height, alignItems: "center" }}>
         {/* VHHS logo */}
         <View style={styles.imageRow}>
+          <View>
         <Image style={styles.imageInRow1} resizeMode="stretch" source={require('../assets/VHHS.png')} />
+        </View>
+        <View>
         <Image style={styles.imageInRow2} resizeMode="stretch" source={require('../assets/LHS2.png')} />
+        </View>
         </View>
         <View style={{marginTop:.062*height}}>
           <View style={styles.hourTotalLines1}>
@@ -496,10 +500,10 @@ function HoursPage({navigation}) {
       <Image source={require("../assets/homeBackground.png")} resizeMode="cover" style={styles.video}/>
 
 
-        <View style={{ alignItems: 'center', justifyContent: "center", marginBottom: 0.0246*height, marginTop: 0.061*height, paddingVertical: 0.0123*height }}>
+        <View style={{ alignItems: 'center', justifyContent: "center", marginBottom: 0.0246*height, paddingVertical: 0.0123*height }}>
           {/* Total Hour Display */}
-          <Text style={[styles.homeHourTotalText, styles.uvBoldFont]}>Total Hours: {getTotal(courseHours, hourType).toFixed(2)}</Text>
-
+          {!show&&<Text style={[styles.homeHourTotalText, styles.uvBoldFont]}>Total Hours: {getTotal(courseHours, hourType).toFixed(2)}</Text>
+}
           {/* Add hour button */}
           {!show && <TouchableOpacity onPress={() => setShow(true)}>
               <View style={styles.addButton}>

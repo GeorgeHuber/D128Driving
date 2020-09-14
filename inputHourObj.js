@@ -1,5 +1,8 @@
 import * as React from 'react';
-import { Picker,  View, Text, TextInput,TouchableOpacity,DatePickerIOS } from 'react-native';
+import { Picker,  Dimensions,View, Text, TextInput,TouchableOpacity,DatePickerIOS } from 'react-native';
+
+const width = Dimensions.get("screen").width;
+const height = Dimensions.get("screen").height;
 
 import  styles  from './styles.js';
 
@@ -59,9 +62,9 @@ setEnteredRoad(enteredText);
         onChangeText={(text)=>{weatherInputHandler(text)}}
         value={enteredWeather}
         />
-        <View style={{flexDirection:'row',marginBottom:70}}>
+        <View style={{flexDirection:'row',justifyContent:"space-around",marginBottom:height*0.08}}>
           <Picker
-           style={{ height: 100, width: 175 }}
+           style={{ height: height*0.15, width:width*0.3 }}
           selectedValue={enteredDay}
           onValueChange={(c)=>dayInputHandler(c)}>
           <Picker.Item label="Day" value="Day" />
@@ -69,7 +72,7 @@ setEnteredRoad(enteredText);
           
         </Picker>
         <Picker
-           style={{ height: 100, width: 200 }}
+           style={{height: height*0.15, width:width*0.3 }}
           selectedValue={enteredRoad}
           onValueChange={(c)=>roadInputHandler(c)}>
           <Picker.Item label="Local" value="Local" />
@@ -85,9 +88,10 @@ setEnteredRoad(enteredText);
           mode='date'
           date={enteredDate}
           onDateChange={(date)=>dateInputHandler(date)}
+          style={{height:height*0.26}}
         />
         <TouchableOpacity onPress={props.onAddObj.bind(this,enteredHour,enteredMinutes,enteredDay,enteredDate,enteredWeather,enteredRoad)}>
-        <View style={{padding:10,width:80,borderWidth:2,borderRadius:7,alignSelf:"center",alignContent:"center",backgroundColor:"white"}}>
+        <View style={{marginTop:height*0.05,padding:6,width:width*0.6,borderWidth:2,borderRadius:7,alignSelf:"center",alignContent:"center",backgroundColor:"white"}}>
         <Text style={[styles.uvFont,{fontSize:20,alignSelf:"center"}]}>{(enteredHour==0||enteredHour==="")&&(enteredMinutes==0||enteredMinutes==="")?"EXIT":"ADD" }</Text>
         </View>
         </TouchableOpacity>
