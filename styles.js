@@ -17,7 +17,7 @@ export default StyleSheet.create({
   textBox: { borderRadius:3,margin:4,borderColor: "black", borderWidth: 2, paddingVertical:0.01*height,paddingHorizontal:0.05*width, width: .9*width, alignSelf: 'center',height:height*0.06 },
   buttonContainer:{ alignItems: "center",paddingHorizontal:0.053*width,paddingVertical:0.00615*height, backgroundColor: "rgba(255, 255, 255,0.6)",borderRadius: 10,borderWidth:2 },
   //blurb box on export page
-  congrats:{alignItems:"center",marginVertical:.1*height,marginHorizontal:0.053*width,borderRadius:10,borderWidth:1,paddingVertical:0.0133*height, paddingHorizontal:0.0267*width,backgroundColor: "rgba(255,255,255,0.8)"},
+  congrats:{alignItems:"center",marginVertical:.05*height,marginHorizontal:0.053*width,borderRadius:10,borderWidth:1,paddingVertical:0.0133*height, paddingHorizontal:0.0267*width,backgroundColor: "rgba(255,255,255,0.8)"},
   //Home page hour total styling
   hourTotalText:{textAlign:"right", fontSize:22,marginHorizontal:0.0267*width,borderTopWidth:1,borderBottomWidth:1},
   hourTotalLines1:{backgroundColor:"rgba(255,255,255,1)",borderWidth:1,marginBottom:height*0.02,borderRadius:2},
@@ -37,7 +37,7 @@ export default StyleSheet.create({
 
   //login and sign in
   headerText:{ marginVertical: 0.025*height, fontSize: 30,color:"rgb(255,255,255)"},
-  frontButtonText:{fontSize:20,marginVertical:0.012*height,textAlign:"center",textAlignVertical:"center",color:"rgb(255,255,255)"},
+  frontButtonText:{fontSize:20,marginVertical:0.005*height,textAlign:"center",textAlignVertical:"center",color:"rgb(255,255,255)"},
   smallFrontButton:{fontSize:16,marginVertical:0.01*height,color:"rgb(255,255,255)"},
   frontButtonContainer:{alignSelf:"center",borderColor:"rgb(255,255,255)",height:0.05*height,width:width*.6,borderRadius:20,borderWidth:2,marginBottom:0.01*height,marginTop:0.05*height},
   textInput:{paddingVertical:.0133*height,paddingHorizontal:.0267*width,width:.8*width,borderWidth:2,marginBottom:.01*height,backgroundColor:"rgba(255,255,255,0.9)"},

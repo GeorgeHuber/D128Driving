@@ -237,7 +237,7 @@ function Download({navigation}) {
     <View>
     <Image source={require("../assets/homeBackground.png")} resizeMode="cover" style={styles.video}/>
     <View style={{ marginTop:.123*height, marginBottom: .246*height, alignItems: 'center' }} >
-      <Text style={[{ alignSelf: 'center', fontSize: 30,marginBottom:.04*height },styles.uvBoldFont,styles.homeHourTotalText]}>Export Your Hours</Text>
+      <Text style={[{ alignSelf: 'center', fontSize: 30,marginBottom:.02*height },styles.uvBoldFont,styles.homeHourTotalText]}>Export Your Hours</Text>
       <TouchableOpacity onPress={()=>printFile()}>
         <View style={[styles.buttonContainer,{width:.8*width,marginVertical:.04*height,backgroundColor:"rgba(255,255,255,1)"}]}>
           <Text style={[styles.uvFont,{fontSize:25,color:"rgb(0,89,162)"}]}>Print</Text>
