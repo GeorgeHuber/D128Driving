@@ -236,7 +236,7 @@ function Download({navigation}) {
   return (
     <View>
     <Image source={require("../assets/homeBackground.png")} resizeMode="cover" style={styles.video}/>
-    <View style={{ marginTop:.123*height, marginBottom: .246*height, alignItems: 'center' }} >
+    <View style={{ marginTop:.07*height, marginBottom: .246*height, alignItems: 'center' }} >
       <Text style={[{ alignSelf: 'center', fontSize: 30,marginBottom:.02*height },styles.uvBoldFont,styles.homeHourTotalText]}>Export Your Hours</Text>
       <TouchableOpacity onPress={()=>printFile()}>
         <View style={[styles.buttonContainer,{width:.8*width,marginVertical:.04*height,backgroundColor:"rgba(255,255,255,1)"}]}>
@@ -582,7 +582,7 @@ function infoPage(){
       
       <Image source={require("../assets/homeBackground.png")} resizeMode="cover" style={styles.video}/>
       <ScrollView>
-        <View style={[styles.infoContainer,{marginTop:height*0.2}]}>
+        <View style={[styles.infoContainer,{marginTop:.1*height}]}>
         <Text style={[styles.sectionTitle,styles.uvBoldFont]}>About The App</Text>
         <Text style={[styles.infoBodyText,styles.uvFont]}>     Within the Illinois drivers education program, students are required by law to record 50 total hours of driving (10 of which are at night) before going to get their lisence from the DMV. This app was designed by a highschool student to help others log their practice hours and then export them to print out.  </Text>
         </View>

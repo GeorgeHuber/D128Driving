@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { Dimensions, Image, Text, TextInput, View, Button } from 'react-native'
+import { Dimensions, Image, Text, TextInput, View, KeyboardAvoidingView} from 'react-native'
 import { Video } from 'expo-av';
 import * as firebase from "firebase";
 import styles from '../styles.js';
@@ -93,6 +93,7 @@ export default class Login extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+       
         {  this.state.page!=2?<Fragment>
           <Image 
           resizeMode="stretch"
@@ -100,7 +101,9 @@ export default class Login extends React.Component {
         {(this.state.page===0) &&
         <Fragment>
         <Text style={[styles.uvBoldFont,styles.headerText]}>Login</Text>
-        
+        <KeyboardAvoidingView
+      
+      behavior={ "position"}>
         <TextInput
           style={styles.textInput}
           autoCapitalize="none"
@@ -115,9 +118,9 @@ export default class Login extends React.Component {
           placeholder="Password"
           onChangeText={password => this.setState({ password })}
 
-        />
+        /></KeyboardAvoidingView>
         {this.state.errorMessage &&
-          <Text style={{ color: 'red' }}>
+          <Text style={{ color: 'red',backgroundColor:"rgba(255,255,255,0.8)" }}>
             {this.state.errorMessage}
           </Text>}
         <View style={{ paddingVertical:.05*height,paddingHorizontal: .13*width }}>
@@ -145,7 +148,9 @@ export default class Login extends React.Component {
 
         {this.state.page===1&&<Fragment>
         <Text style={[styles.uvBoldFont,styles.headerText]}>Sign Up</Text>
+        <KeyboardAvoidingView
         
+      behavior={ "position"}>
         <TextInput
           placeholder="Email"
           autoCapitalize="none"
@@ -161,8 +166,9 @@ export default class Login extends React.Component {
           onChangeText={password => this.setState({ password })}
 
         />
+        </KeyboardAvoidingView>
         {this.state.errorMessage &&
-          <Text style={{ color: 'red' }}>
+          <Text style={{ color: 'red',backgroundColor:"rgba(255,255,255,0.8)" }}>
             {this.state.errorMessage}
           </Text>}
         <View style={{ paddingVertical:0.05*height,paddingHorizontal: .13*width }}>
@@ -188,7 +194,7 @@ export default class Login extends React.Component {
           <Fragment>{/*reset page*/}
           <Text style={[styles.uvBoldFont,styles.headerText,{marginTop:height*.2}]}>Type Your Email: </Text>
           {this.state.errorMessage &&
-            <Text style={{ color: 'red' }}>
+            <Text style={{ color: 'red',backgroundColor:"rgba(255,255,255,0.8)" }}>
               {this.state.errorMessage}
             </Text>}
           {this.state.sent && <Text style={{marginVertical:0.0246*height,fontSize:15,fontFamily:"Futura-Medium"}}>{this.state.sent}</Text>}
@@ -216,7 +222,7 @@ onPress={() =>  {this.setState({page:0,errorMessage:null,email:""})}}
           
           </View>
             </Fragment>}
-
+            
 
 
         <View style={[styles.video,{zIndex:-1,backgroundColor:"rgba(0,0,0,0.0)"}]}/>
@@ -231,40 +237,4 @@ onPress={() =>  {this.setState({page:0,errorMessage:null,email:""})}}
     )
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
