@@ -68,11 +68,11 @@ export default class Login extends React.Component {
         if (user) {
           const db = firebase.firestore();
 
-          console.log("user " + user.uid);
-          console.log("made it this far");
+          //console.log("user " + user.uid);
+          //console.log("made it this far");
           db.collection("users").doc(user.uid).set({ data: "[]", totalHours: "0" })
             .then(function () {
-              console.log("Document successfully written!");
+              //console.log("Document successfully written!");
             });
         }
       });}
