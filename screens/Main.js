@@ -469,7 +469,7 @@ function HoursPage({navigation}) {
       firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
           const db = firebase.firestore();
-          db.collection("users").doc(user.uid).set({ totalHours: JSON.stringify(getTotal(newHours, "All")), data: JSON.stringify(newHours) })
+          db.collection("users").doc(user.uid).set({ totalHours: JSON.stringify(getTotal(newHours, "All")), data: JSON.stringify(newHours) },{ merge: true })
         }
       });
     } setShow(false);
@@ -485,7 +485,7 @@ function HoursPage({navigation}) {
     firebase.auth().onAuthStateChanged(function (user) {
       if (user) {
         const db = firebase.firestore();
-        db.collection("users").doc(user.uid).set({ totalHours: JSON.stringify(getTotal(temp, "All")), data: JSON.stringify(temp) })
+        db.collection("users").doc(user.uid).set({ totalHours: JSON.stringify(getTotal(temp, "All")), data: JSON.stringify(temp) },{ merge: true })
 
       }
     });
