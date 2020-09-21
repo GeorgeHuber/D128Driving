@@ -10,14 +10,14 @@ const ObjInput =props => {
     const[enteredHour,setEnteredHour]=React.useState('');
     
     const hourInputHandler=(enteredText)=>{
-    setEnteredHour(enteredText);
+    setEnteredHour(enteredText!="."?enteredText:"0");
   }
 
   const[enteredMinutes,setEnteredMinutes]=React.useState('');
     
   const minuteInputHandler=(enteredText)=>{
       
-  setEnteredMinutes(parseInt(enteredText)<60||enteredText==""?enteredText:"0");
+  setEnteredMinutes((parseInt(enteredText)<60||enteredText=="")&&enteredText!="."?enteredText:"0");
 }
 
 const[enteredDay,setEnteredDay]=React.useState('Day');

@@ -104,13 +104,18 @@ export default class Login extends React.Component {
         <KeyboardAvoidingView
       
       behavior={ "position"}>
+        <View style={styles.textInputV}>
         <TextInput
           style={styles.textInput}
           autoCapitalize="none"
           placeholder="Email"
           onChangeText={email => this.setState({ email })}
-
+          autoCompleteType="email"
+          keyboardType="email-address"
+          textContentType="emailAddress"
         />
+        </View>
+        <View style={styles.textInputV}>
         <TextInput
           secureTextEntry
           style={styles.textInput}
@@ -118,7 +123,9 @@ export default class Login extends React.Component {
           placeholder="Password"
           onChangeText={password => this.setState({ password })}
 
-        /></KeyboardAvoidingView>
+        />
+        </View>
+        </KeyboardAvoidingView>
         {this.state.errorMessage &&
           <Text style={{ color: 'red',backgroundColor:"rgba(255,255,255,0.8)" }}>
             {this.state.errorMessage}
@@ -151,13 +158,18 @@ export default class Login extends React.Component {
         <KeyboardAvoidingView
         
       behavior={ "position"}>
+        <View style={styles.textInputV}>
         <TextInput
           placeholder="Email"
           autoCapitalize="none"
           style={styles.textInput}
           onChangeText={email => this.setState({ email })}
-
+          autoCompleteType="email"
+          keyboardType="email-address"
+          textContentType="emailAddress"
         />
+        </View>
+        <View style={styles.textInputV}>
         <TextInput
           secureTextEntry
           placeholder="Password"
@@ -166,6 +178,7 @@ export default class Login extends React.Component {
           onChangeText={password => this.setState({ password })}
 
         />
+        </View>
         </KeyboardAvoidingView>
         {this.state.errorMessage &&
           <Text style={{ color: 'red',backgroundColor:"rgba(255,255,255,0.8)" }}>
@@ -198,13 +211,18 @@ export default class Login extends React.Component {
               {this.state.errorMessage}
             </Text>}
           {this.state.sent && <Text style={{marginVertical:0.0246*height,fontSize:15,fontFamily:"Futura-Medium"}}>{this.state.sent}</Text>}
-          <TextInput
+          
+          <View style={styles.textInputV}>
+            <TextInput
             style={styles.textInput}
             autoCapitalize="none"
             placeholder="Email"
             onChangeText={email => this.setState({ email })}
-            
+            autoCompleteType="email"
+            keyboardType="email-address"
+            textContentType="emailAddress"
           />
+          </View>
           <View style={{padding:height*.1}}>
           <TouchableOpacity
 

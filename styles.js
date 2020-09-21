@@ -40,7 +40,8 @@ export default StyleSheet.create({
   frontButtonText:{fontSize:20,marginVertical:0.005*height,textAlign:"center",textAlignVertical:"center",color:"rgb(255,255,255)"},
   smallFrontButton:{fontSize:16,marginVertical:0.01*height,color:"rgb(255,255,255)"},
   frontButtonContainer:{alignSelf:"center",borderColor:"rgb(255,255,255)",height:0.05*height,width:width*.6,borderRadius:20,borderWidth:2,marginBottom:0.01*height,marginTop:0.05*height},
-  textInput:{paddingVertical:.0133*height,paddingHorizontal:.0267*width,width:.8*width,borderWidth:2,marginBottom:.01*height,backgroundColor:"rgba(255,255,255,0.9)"},
+  textInput:{paddingVertical:.0133*height,paddingHorizontal:.0267*width,width:.8*width,borderWidth:2},
+  textInputV:{backgroundColor:"rgba(255,255,255,0.9)",marginBottom:.01*height},
   container:{flex:1,alignItems:"center"},
   loginImage:{ width: 0.4*height, height:0.4*height,marginTop:height*0.05,marginBottom:height*0.02 },
   video: {
