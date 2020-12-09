@@ -1,25 +1,21 @@
 
 import * as React from 'react';
-import { Dimensions, Image, View, Text, ScrollView, FlatList, TouchableOpacity, Linking, } from 'react-native';
-import { NavigationContainer,useFocusEffect } from '@react-navigation/native';
-import * as Print from 'expo-print';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Dimensions,ActivityIndicator, Image, View, Text, TouchableOpacity, } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
 import firebase from "firebase";
 import "firebase/firestore"
-import * as MailComposer from 'expo-mail-composer';
+
+import { loadAsync } from 'expo-font';
 
 
-import ObjInput from '../inputHourObj.js'
+ 
+
 import  styles  from '../styles.js';
 
 import {getTotal} from "../components/hourFunctions"
 
-const width = Dimensions.get("screen").width;
 const height = Dimensions.get("screen").height;
 
-
-
-//the share page
 
 
 
@@ -28,6 +24,21 @@ function Home({navigation}) {
   
   //defines constants for hours
   const [courseHours,setCourseHours]=React.useState([])
+  
+  //function to load load fonts 
+  const loadFonts  = async () =>{
+    await loadAsync({
+      'Noto-Black': require('../assets/fonts/NotoSansSC-Black.otf'),
+      'Noto-Bold': require('../assets/fonts/NotoSansSC-Bold.otf'),
+      'Noto-Light': require('../assets/fonts/NotoSansSC-Light.otf'),
+      'Noto-Medium': require('../assets/fonts/NotoSansSC-Medium.otf'),
+      'Noto-Regular': require('../assets/fonts/NotoSansSC-Regular.otf'),
+      'Noto-Thin': require('../assets/fonts/NotoSansSC-Thin.otf')
+    })
+    setFontsLoaded(true);
+  }
+
+  const [fontsLoaded,setFontsLoaded]=React.useState(false)
 
 
   //asychronous function to be called on press of signout button
@@ -43,10 +54,9 @@ function Home({navigation}) {
 
   //Function is called once when page is loaded to get the course hour array from a firebase database
   React.useEffect(() => {
-    
+    loadFonts()
 
     const unsubscribe = 
- 
       firebase.auth().onAuthStateChanged(
         function (user) {
           if (user) {
@@ -90,7 +100,7 @@ function Home({navigation}) {
     }, [])
   );
 
-
+  if(fontsLoaded){
   //the actual page
   return (
     <View >
@@ -129,7 +139,17 @@ function Home({navigation}) {
       
     </View>
   );
+} else {
+  
+  
+  return(
+    <View>
+      <ActivityIndicator/>
+    </View>
+  )
 }
+}
+
 
 
 

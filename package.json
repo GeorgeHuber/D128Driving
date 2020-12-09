@@ -8,6 +8,7 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@expo-google-fonts/inter": "^0.1.0",
     "@react-native-community/async-storage": "^1.8.1",
     "@react-native-community/datetimepicker": "2.1.0",
     "@react-native-community/google-signin": "^4.0.0",
@@ -21,6 +22,7 @@
     "expo": "~36.0.0",
     "expo-app-auth": "~8.0.0",
     "expo-av": "^8.4.0",
+    "expo-font": "~8.0.0",
     "expo-google-app-auth": "^8.1.0",
     "expo-google-sign-in": "~8.0.0",
     "expo-mail-composer": "~8.0.0",

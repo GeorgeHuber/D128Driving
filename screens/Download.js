@@ -1,9 +1,8 @@
 
 import * as React from 'react';
-import { Dimensions, Image, View, Text, ScrollView, FlatList, TouchableOpacity, Linking, } from 'react-native';
-import { NavigationContainer,useFocusEffect } from '@react-navigation/native';
+import { Dimensions, Image, View, Text, TouchableOpacity, } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
 import * as Print from 'expo-print';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import firebase from "firebase";
 import "firebase/firestore"
 import * as MailComposer from 'expo-mail-composer';
@@ -11,7 +10,6 @@ import * as MailComposer from 'expo-mail-composer';
 
 
 
-import ObjInput from '../inputHourObj.js'
 import  styles  from '../styles.js';
 
 import {getTotal} from "../components/hourFunctions"
@@ -24,7 +22,7 @@ const height = Dimensions.get("screen").height;
 
 //the share page
 
-function Download({navigation}) {
+function Download({}) {
   /* defines empty coursehours array to be populated by firebase  */
   const [courseHours, setCourseHours] = React.useState([]);
   
@@ -113,7 +111,7 @@ function Download({navigation}) {
   
   //function to be called on press of email button
   //opens a ios native tab to send hours as pdf attachment in user customizable email
-  const emailFile = (args) => {
+  const emailFile = () => {
     async function sendPDF() {
       let data = JSON.stringify(formatData(courseHours));
       let options = {
@@ -127,7 +125,7 @@ function Download({navigation}) {
   }
 
   //function to print a file to an airprinter
-  const printFile = (args) => {
+  const printFile = () => {
     async function createPDF() {
       let data = JSON.stringify(formatData(courseHours));
       let options = {

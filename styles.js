@@ -1,8 +1,13 @@
 import { StyleSheet,Dimensions } from 'react-native';
+
+
+
+
 //a stylsheet to hold common styles which render onto the react components
 
 const width = Dimensions.get("screen").width;
 const height = Dimensions.get("screen").height;
+
 
 
 export default StyleSheet.create({
@@ -11,8 +16,8 @@ export default StyleSheet.create({
   selector2: { marginHorizontal: 0.04*width, borderRadius: 7,backgroundColor:"rgba(255,255,255,0.9)",borderWidth:2  },
   nightDayButton: { color: "black", margin: 0.0084*height, fontSize: 20 },
   //allow for easy font change
-  uvFont: { fontFamily: "Avenir-Book" },
-  uvBoldFont: { fontFamily: "Avenir-Black" },
+  uvFont: { fontFamily: "Noto-Regular"},//"Avenir-Book" },
+  uvBoldFont: { fontFamily: "Noto-Bold" },//"Avenir-Black" },
   //Text boxes in Input hour page
   textBox: { borderRadius:3,margin:4,borderColor: "black", borderWidth: 2, paddingVertical:0.01*height,paddingHorizontal:0.05*width, width: .9*width, alignSelf: 'center',height:height*0.06 },
   buttonContainer:{ alignItems: "center",paddingHorizontal:0.053*width,paddingVertical:0.00615*height, backgroundColor: "rgba(255, 255, 255,0.6)",borderRadius: 10,borderWidth:2 },

@@ -1,23 +1,13 @@
 
 import * as React from 'react';
-import { Dimensions, Image, View, Text, ScrollView, FlatList, TouchableOpacity, Linking, } from 'react-native';
-import { NavigationContainer,useFocusEffect } from '@react-navigation/native';
-import * as Print from 'expo-print';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import firebase from "firebase";
+import { Dimensions, Image, View, Text, ScrollView, Linking, } from 'react-native';
 import "firebase/firestore"
-import * as MailComposer from 'expo-mail-composer';
-
-import Download from "./Download.js";
-import About from "./About.js"
-import HourPage from "./HourPage.js"
 
 
-import ObjInput from '../inputHourObj.js'
+
 import  styles  from '../styles.js';
 
 
-const width = Dimensions.get("screen").width;
 const height = Dimensions.get("screen").height;
 
 function infoPage(){

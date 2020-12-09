@@ -1,13 +1,9 @@
 
 import * as React from 'react';
-import { Dimensions, Image, View, Text, ScrollView, FlatList, TouchableOpacity, Linking, } from 'react-native';
-import { NavigationContainer,useFocusEffect } from '@react-navigation/native';
-import * as Print from 'expo-print';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Dimensions, Image, View, Text, FlatList, TouchableOpacity, } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
 import firebase from "firebase";
 import "firebase/firestore"
-import * as MailComposer from 'expo-mail-composer';
-import Download from "./Download.js";
 
 
 
@@ -22,7 +18,7 @@ const height = Dimensions.get("screen").height;
 
 
 //Page to display and edit entered hours
-function HoursPage({navigation}) {
+function HoursPage({}) {
   //defines variables that update the page
   const [hourType, setHourType] = React.useState("All")
   const [show, setShow] = React.useState(false)
@@ -50,10 +46,6 @@ function HoursPage({navigation}) {
         }
       }
     )
-    
-    
-    
-    
     return unsubscribe
   }, [])
   
